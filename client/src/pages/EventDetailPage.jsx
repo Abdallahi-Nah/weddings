@@ -125,7 +125,7 @@ export default function EventDetailPage() {
         throw new Error('PDF generation failed');
       }
       const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+      const blobUrl = URL.createObjectURL(blob);
       const safeTitle = (event.title || 'report').replace(/[^a-zA-Z0-9\u0600-\u06FF_\-]/g, '_');
       const a = document.createElement('a');
       a.href = blobUrl;
