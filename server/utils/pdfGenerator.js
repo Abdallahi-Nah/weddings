@@ -177,7 +177,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: 'networkidle0' });
 
-  const pdfBuffer = await page.pdf({
+  const pdfRaw = await page.pdf({
     format: 'A4',
     printBackground: true,
     margin: {
@@ -189,6 +189,8 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   });
 
   await browser.close();
+
+  const pdfBuffer = Buffer.from(pdfRaw);
 
   const filename = `report-${eventData._id}-${lang}.pdf`;
   res.setHeader('Content-Type', 'application/pdf');
