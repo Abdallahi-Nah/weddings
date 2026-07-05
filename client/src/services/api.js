@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE,
 });
 
 // Attach JWT token to every request
@@ -59,4 +61,4 @@ export const deleteFriend = (id) => api.delete(`/friends/${id}`);
 
 // Reports
 export const getReport = (eventId) => api.get(`/events/${eventId}/report`);
-export const getPdfUrl = (eventId, lang) => `/api/events/${eventId}/report/pdf?lang=${lang}`;
+export const getPdfUrl = (eventId, lang) => `${API_BASE}/events/${eventId}/report/pdf?lang=${lang}`;
