@@ -158,7 +158,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
     const chromium = require('@sparticuz/chromium');
     chromium.setGraphicsMode = false;
     executablePath = await chromium.executablePath();
-    browserArgs = await puppeteerCore.defaultArgs({ args: chromium.args, headless: 'shell' });
+    browserArgs = chromium.args;
   } else {
     executablePath =
       process.env.CHROME_EXECUTABLE_PATH ||
@@ -171,7 +171,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   const browser = await puppeteerCore.launch({
     executablePath,
     args: browserArgs,
-    headless: 'shell',
+    headless: true,
   });
 
   const page = await browser.newPage();
@@ -192,9 +192,14 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
 
   const pdfBuffer = Buffer.from(pdfRaw);
 
+  if (pdfBuffer.length === 0) {
+    throw new Error('PDF buffer is empty');
+  }
+
   const filename = `report-${eventData._id}-${lang}.pdf`;
   res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.setHeader('X-PDF-Size', String(pdfBuffer.length));
   res.send(pdfBuffer);
 }
 
