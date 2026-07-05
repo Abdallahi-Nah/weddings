@@ -1,0 +1,162 @@
+{
+  "app": {
+    "name": "Gestionnaire de Mariage",
+    "tagline": "Gérez les contributions et dépenses du groupe"
+  },
+  "nav": {
+    "dashboard": "Accueil",
+    "events": "Mariages",
+    "friends": "Amis",
+    "settings": "Paramètres",
+    "report": "Rapport"
+  },
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "phone": "Numéro de téléphone",
+    "password": "Mot de passe",
+    "loginButton": "Se connecter",
+    "loginTitle": "Bienvenue, Superviseur",
+    "loginSubtitle": "Connectez-vous pour continuer",
+    "invalidCredentials": "Téléphone ou mot de passe incorrect",
+    "changePassword": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "passwordChanged": "Mot de passe modifié avec succès",
+    "passwordMismatch": "Les mots de passe ne correspondent pas"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "activeEvent": "Événement en cours",
+    "noActiveEvent": "Aucun événement actif",
+    "createEvent": "Créer un événement",
+    "recentEvents": "Mariages récents",
+    "viewAll": "Voir tout →",
+    "totalCollected": "Total collecté",
+    "totalSpent": "Total dépensé",
+    "balance": "Solde"
+  },
+  "events": {
+    "title": "Mariages",
+    "newEvent": "Nouveau mariage",
+    "eventTitle": "Titre de l'événement",
+    "groomName": "Nom du marié",
+    "eventDate": "Date du mariage",
+    "status": "Statut",
+    "active": "Actif",
+    "closed": "Clôturé",
+    "notes": "Notes",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "close": "Clôturer",
+    "reopen": "Rouvrir",
+    "all": "Tous",
+    "deleteConfirm": "Supprimer cet événement et toutes ses données ?",
+    "created": "Événement créé",
+    "updated": "Événement mis à jour",
+    "deleted": "Événement supprimé",
+    "statusChanged": "Statut de l'événement modifié",
+    "noEvents": "Aucun mariage enregistré"
+  },
+  "contributions": {
+    "title": "Contributions",
+    "add": "Ajouter une contribution",
+    "friendName": "Nom de l'ami",
+    "amount": "Montant (MRU)",
+    "date": "Date",
+    "notes": "Notes",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "deleteConfirm": "Supprimer cette contribution ?",
+    "added": "Contribution ajoutée",
+    "updated": "Contribution mise à jour",
+    "deleted": "Contribution supprimée",
+    "total": "Total des contributions",
+    "noContributions": "Aucune contribution enregistrée"
+  },
+  "expenses": {
+    "title": "Dépenses",
+    "add": "Ajouter une dépense",
+    "name": "Libellé",
+    "category": "Catégorie",
+    "amount": "Montant (MRU)",
+    "datetime": "Date et heure",
+    "notes": "Notes",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "deleteConfirm": "Supprimer cette dépense ?",
+    "added": "Dépense ajoutée",
+    "updated": "Dépense mise à jour",
+    "deleted": "Dépense supprimée",
+    "total": "Total des dépenses",
+    "noExpenses": "Aucune dépense enregistrée",
+    "categories": {
+      "apartment": "Location d'appartement",
+      "cars": "Location de voitures",
+      "banquet": "Banquet",
+      "gifts": "Cadeaux",
+      "other": "Autre"
+    }
+  },
+  "report": {
+    "title": "Rapport",
+    "export": "Exporter en PDF",
+    "generating": "Génération en cours...",
+    "contributions": "Contributions",
+    "expenses": "Dépenses",
+    "summary": "Résumé",
+    "totalCollected": "Total collecté",
+    "totalSpent": "Total dépensé",
+    "balance": "Solde restant",
+    "pdfReady": "Rapport téléchargé avec succès"
+  },
+  "friends": {
+    "title": "Liste d'amis",
+    "add": "Ajouter un ami",
+    "name": "Nom",
+    "delete": "Supprimer",
+    "deleteConfirm": "Supprimer cet ami ?",
+    "added": "Ami ajouté",
+    "deleted": "Ami supprimé",
+    "noFriends": "Aucun ami enregistré",
+    "placeholder": "Entrez le nom..."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "account": "Compte",
+    "supervisor": "Superviseur"
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "confirm": "Confirmer",
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Opération réussie",
+    "currency": "MRU",
+    "noData": "Aucune donnée",
+    "back": "Retour",
+    "tabs": {
+      "contributions": "Contributions",
+      "expenses": "Dépenses",
+      "report": "Rapport"
+    }
+  },
+  "pwa": {
+    "title": "Installer l'application",
+    "install": "Installer l'application",
+    "installed": "Application déjà installée",
+    "notAvailable": "Installation non disponible sur ce navigateur",
+    "iosTitle": "Suivez ces étapes pour installer:",
+    "iosStep1": "1️⃣ Appuyez sur le bouton Partager (↑) dans Safari",
+    "iosStep2": "2️⃣ Choisissez \"Sur l'écran d'accueil\"",
+    "iosStep3": "3️⃣ Appuyez sur \"Ajouter\" pour installer"
+  }
+}

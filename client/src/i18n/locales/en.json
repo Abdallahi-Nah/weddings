@@ -1,0 +1,162 @@
+{
+  "app": {
+    "name": "Wedding Fund Manager",
+    "tagline": "Manage group contributions & wedding expenses"
+  },
+  "nav": {
+    "dashboard": "Home",
+    "events": "Weddings",
+    "friends": "Friends",
+    "settings": "Settings",
+    "report": "Report"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "phone": "Phone Number",
+    "password": "Password",
+    "loginButton": "Sign In",
+    "loginTitle": "Welcome, Supervisor",
+    "loginSubtitle": "Sign in to continue",
+    "invalidCredentials": "Invalid phone or password",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordChanged": "Password changed successfully",
+    "passwordMismatch": "Passwords do not match"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "activeEvent": "Active Event",
+    "noActiveEvent": "No active event",
+    "createEvent": "Create Event",
+    "recentEvents": "Recent Weddings",
+    "viewAll": "View all →",
+    "totalCollected": "Total Collected",
+    "totalSpent": "Total Spent",
+    "balance": "Balance"
+  },
+  "events": {
+    "title": "Weddings",
+    "newEvent": "New Wedding",
+    "eventTitle": "Event Title",
+    "groomName": "Groom's Name",
+    "eventDate": "Wedding Date",
+    "status": "Status",
+    "active": "Active",
+    "closed": "Closed",
+    "notes": "Notes",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "close": "Close Event",
+    "reopen": "Reopen",
+    "all": "All",
+    "deleteConfirm": "Delete this wedding and all its data?",
+    "created": "Wedding event created",
+    "updated": "Wedding event updated",
+    "deleted": "Wedding event deleted",
+    "statusChanged": "Event status changed",
+    "noEvents": "No weddings recorded yet"
+  },
+  "contributions": {
+    "title": "Contributions",
+    "add": "Add Contribution",
+    "friendName": "Friend's Name",
+    "amount": "Amount (MRU)",
+    "date": "Date",
+    "notes": "Notes",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this contribution?",
+    "added": "Contribution added",
+    "updated": "Contribution updated",
+    "deleted": "Contribution deleted",
+    "total": "Total Contributions",
+    "noContributions": "No contributions recorded yet"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "add": "Add Expense",
+    "name": "Expense Name",
+    "category": "Category",
+    "amount": "Amount (MRU)",
+    "datetime": "Date & Time",
+    "notes": "Notes",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this expense?",
+    "added": "Expense added",
+    "updated": "Expense updated",
+    "deleted": "Expense deleted",
+    "total": "Total Expenses",
+    "noExpenses": "No expenses recorded yet",
+    "categories": {
+      "apartment": "Apartment Rental",
+      "cars": "Car Rental",
+      "banquet": "Banquet / Meal",
+      "gifts": "Gifts",
+      "other": "Other"
+    }
+  },
+  "report": {
+    "title": "Report",
+    "export": "Export PDF",
+    "generating": "Generating...",
+    "contributions": "Contributions",
+    "expenses": "Expenses",
+    "summary": "Summary",
+    "totalCollected": "Total Collected",
+    "totalSpent": "Total Spent",
+    "balance": "Remaining Balance",
+    "pdfReady": "Report downloaded successfully"
+  },
+  "friends": {
+    "title": "Friends List",
+    "add": "Add Friend",
+    "name": "Name",
+    "delete": "Remove",
+    "deleteConfirm": "Remove this friend?",
+    "added": "Friend added",
+    "deleted": "Friend removed",
+    "noFriends": "No friends added yet",
+    "placeholder": "Enter name..."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "account": "Account",
+    "supervisor": "Supervisor"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "currency": "MRU",
+    "noData": "No data available",
+    "back": "Back",
+    "tabs": {
+      "contributions": "Contributions",
+      "expenses": "Expenses",
+      "report": "Report"
+    }
+  },
+  "pwa": {
+    "title": "Install App",
+    "install": "Install App",
+    "installed": "App already installed",
+    "notAvailable": "Install not available on this browser",
+    "iosTitle": "Follow these steps to install:",
+    "iosStep1": "1️⃣ Tap the Share button (↑) in Safari",
+    "iosStep2": "2️⃣ Choose \"Add to Home Screen\"",
+    "iosStep3": "3️⃣ Tap \"Add\" to install the app"
+  }
+}

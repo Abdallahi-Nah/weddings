@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>" dir="<%= isRTL ? 'rtl' : 'ltr' %>">
+<head>
+  <meta charset="UTF-8">
+  <style><%- cairoFaceCSS %></style>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #2a2a1a;
+      background: white;
+    }
+    .header {
+      background: #1a5738;
+      color: white;
+      padding: 30px 40px;
+    }
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+    }
+    .header .event-title {
+      font-size: 16px;
+      color: #c8f0d8;
+    }
+    .meta {
+      background: #f5f0e8;
+      padding: 20px 40px;
+      color: #5a5a4a;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .content {
+      padding: 30px 40px;
+    }
+    .section-title {
+      background: #e8f5ee;
+      color: #1a5738;
+      padding: 10px 15px;
+      font-size: 16px;
+      font-weight: bold;
+      border: 1px solid #1a5738;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    th {
+      background: #1a5738;
+      color: white;
+      padding: 10px;
+      text-align: start;
+    }
+    td {
+      padding: 10px;
+      border: 1px solid #e0ddd5;
+      text-align: start;
+    }
+    tr:nth-child(even) {
+      background: #f7f8f5;
+    }
+    .total-row td {
+      background: #d4edd9;
+      color: #1a5738;
+      font-weight: bold;
+      border: 1px solid #1a5738;
+    }
+    .summary-box {
+      border: 1px solid #e0ddd5;
+      background: #f9f9f5;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: -1px;
+    }
+    .summary-box.final {
+      background: <%= balance >= 0 ? '#e8f5ee' : '#fdecea' %>;
+      font-weight: bold;
+      color: <%= balance >= 0 ? '#1a5738' : '#c0392b' %>;
+    }
+    .footer {
+      text-align: center;
+      color: #aaa8a0;
+      font-size: 11px;
+      margin-top: 40px;
+      padding-bottom: 20px;
+    }
+    .money {
+      text-align: end !important;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1><%= t.reportTitle %></h1>
+    <div class="event-title"><%= t.event %>: <%= eventData.title %></div>
+  </div>
+  
+  <div class="meta">
+    <div><strong><%= t.groomName %>:</strong> <%= eventData.groomName %></div>
+    <div><strong><%= t.eventDate %>:</strong> <bdi><%= dateLine %></bdi></div>
+    <div><strong><%= t.generatedAt %>:</strong> <bdi><%= genLine %></bdi></div>
+  </div>
+
+  <div class="content">
+    <div class="section-title"><%= t.contributionsSection %></div>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t.friendName %></th>
+          <th class="money" style="width: 30%;"><%= t.amountPaid %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% contributions.forEach(c => { %>
+          <tr>
+            <td><%= c.friendName %></td>
+            <td class="money"><bdi><%= formatMRU(c.amount, lang) %></bdi></td>
+          </tr>
+        <% }) %>
+        <tr class="total-row">
+          <td><%= t.total %></td>
+          <td class="money"><bdi><%= formatMRU(totalCollected, lang) %></bdi></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title"><%= t.expensesSection %></div>
+    <table>
+      <thead>
+        <tr>
+          <th><%= t.expenseName %></th>
+          <th style="width: 25%;"><%= t.expenseDate %></th>
+          <th class="money" style="width: 25%;"><%= t.expenseAmount %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% expenses.forEach(e => { %>
+          <tr>
+            <td>
+              <%= e.name %>
+              <% if (e.notes) { %><br><small>(<%= e.notes %>)</small><% } %>
+            </td>
+            <td><bdi><%= formatDatetime(e.datetime, lang) %></bdi></td>
+            <td class="money"><bdi><%= formatMRU(e.amount, lang) %></bdi></td>
+          </tr>
+        <% }) %>
+        <tr class="total-row">
+          <td colspan="2"><%= t.total %></td>
+          <td class="money"><bdi><%= formatMRU(totalSpent, lang) %></bdi></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title"><%= t.summarySection %></div>
+    <div class="summary-box">
+      <span><%= t.totalCollected %></span>
+      <span style="color: #2a7a4f;"><bdi><%= formatMRU(totalCollected, lang) %></bdi></span>
+    </div>
+    <div class="summary-box">
+      <span><%= t.totalSpent %></span>
+      <span style="color: #c0392b;"><bdi><%= formatMRU(totalSpent, lang) %></bdi></span>
+    </div>
+    <div class="summary-box final">
+      <span><%= t.balance %></span>
+      <span><bdi><%= formatMRU(balance, lang) %></bdi></span>
+    </div>
+
+    <div class="footer"><%= generatedByText %></div>
+  </div>
+</body>
+</html>

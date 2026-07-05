@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+dist/
+build/
+.vercel
+*.log
+.DS_Store
+coverage/
+.vscode/
+client/dist/
+server/assets/fonts/cairo-face.css

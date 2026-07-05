@@ -1,0 +1,162 @@
+{
+  "app": {
+    "name": "مدير أعراس",
+    "tagline": "إدارة مساهمات وأعراس الأصدقاء"
+  },
+  "nav": {
+    "dashboard": "الرئيسية",
+    "events": "الأعراس",
+    "friends": "الأصدقاء",
+    "settings": "الإعدادات",
+    "report": "التقرير"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "phone": "رقم الهاتف",
+    "password": "كلمة المرور",
+    "loginButton": "دخول",
+    "loginTitle": "مرحباً بك، المشرف",
+    "loginSubtitle": "سجّل دخولك للمتابعة",
+    "invalidCredentials": "الهاتف أو كلمة المرور غير صحيحة",
+    "changePassword": "تغيير كلمة المرور",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordChanged": "تم تغيير كلمة المرور بنجاح",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "activeEvent": "الحفل الجاري",
+    "noActiveEvent": "لا يوجد حفل نشط",
+    "createEvent": "إنشاء حفل جديد",
+    "recentEvents": "آخر الأعراس",
+    "viewAll": "عرض الكل ←",
+    "totalCollected": "إجمالي المجموع",
+    "totalSpent": "إجمالي المصروف",
+    "balance": "الرصيد"
+  },
+  "events": {
+    "title": "الأعراس",
+    "newEvent": "حفل جديد",
+    "eventTitle": "اسم الحفل",
+    "groomName": "اسم العريس",
+    "eventDate": "تاريخ الحفل",
+    "status": "الحالة",
+    "active": "نشط",
+    "closed": "مغلق",
+    "notes": "ملاحظات",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "delete": "حذف",
+    "close": "إغلاق",
+    "reopen": "إعادة فتح",
+    "all": "الكل",
+    "deleteConfirm": "هل أنت متأكد من حذف هذا الحفل وجميع بياناته؟",
+    "created": "تم إنشاء الحفل",
+    "updated": "تم تحديث الحفل",
+    "deleted": "تم حذف الحفل",
+    "statusChanged": "تم تغيير حالة الحفل",
+    "noEvents": "لا توجد أعراس بعد"
+  },
+  "contributions": {
+    "title": "المساهمات",
+    "add": "إضافة مساهمة",
+    "friendName": "اسم الصديق",
+    "amount": "المبلغ (MRU)",
+    "date": "التاريخ",
+    "notes": "ملاحظات",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "deleteConfirm": "هل تريد حذف هذه المساهمة؟",
+    "added": "تمت إضافة المساهمة",
+    "updated": "تم تحديث المساهمة",
+    "deleted": "تم حذف المساهمة",
+    "total": "إجمالي المساهمات",
+    "noContributions": "لا توجد مساهمات بعد"
+  },
+  "expenses": {
+    "title": "المصروفات",
+    "add": "إضافة مصروف",
+    "name": "اسم البند",
+    "category": "الفئة",
+    "amount": "المبلغ (MRU)",
+    "datetime": "التاريخ والوقت",
+    "notes": "ملاحظات",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "deleteConfirm": "هل تريد حذف هذا المصروف؟",
+    "added": "تمت إضافة المصروف",
+    "updated": "تم تحديث المصروف",
+    "deleted": "تم حذف المصروف",
+    "total": "إجمالي المصروفات",
+    "noExpenses": "لا توجد مصروفات بعد",
+    "categories": {
+      "apartment": "استئجار شقة",
+      "cars": "استئجار سيارات",
+      "banquet": "الوليمة",
+      "gifts": "الهدايا",
+      "other": "أخرى"
+    }
+  },
+  "report": {
+    "title": "التقرير",
+    "export": "تصدير PDF",
+    "generating": "جاري الإنشاء...",
+    "contributions": "المساهمات",
+    "expenses": "المصروفات",
+    "summary": "الملخص",
+    "totalCollected": "إجمالي المجموع",
+    "totalSpent": "إجمالي المصروف",
+    "balance": "الرصيد المتبقي",
+    "pdfReady": "تم تنزيل التقرير بنجاح"
+  },
+  "friends": {
+    "title": "قائمة الأصدقاء",
+    "add": "إضافة صديق",
+    "name": "الاسم",
+    "delete": "حذف",
+    "deleteConfirm": "هل تريد إزالة هذا الصديق؟",
+    "added": "تمت الإضافة",
+    "deleted": "تم الحذف",
+    "noFriends": "لا يوجد أصدقاء بعد",
+    "placeholder": "أدخل الاسم..."
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "account": "الحساب",
+    "supervisor": "المشرف"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "confirm": "تأكيد",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "تمت العملية بنجاح",
+    "currency": "MRU",
+    "noData": "لا توجد بيانات",
+    "back": "رجوع",
+    "tabs": {
+      "contributions": "المساهمات",
+      "expenses": "المصروفات",
+      "report": "التقرير"
+    }
+  },
+  "pwa": {
+    "title": "تثبيت التطبيق",
+    "install": "تثبيت التطبيق",
+    "installed": "التطبيق مثبت بالفعل",
+    "notAvailable": "التثبيت غير متاح على هذا المتصفح",
+    "iosTitle": "اتبع هذه الخطوات لإضافة التطبيق:",
+    "iosStep1": "1️⃣ اضغط على زر المشاركة (↑) في شريط أدوات سافاري",
+    "iosStep2": "2️⃣ اختر \"إضافة إلى الشاشة الرئيسية\"",
+    "iosStep3": "3️⃣ اضغط \"إضافة\" لتثبيت التطبيق"
+  }
+}
