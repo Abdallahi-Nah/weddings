@@ -14,17 +14,9 @@ const reportsRoutes = require('./routes/reports');
 const app = express();
 
 // CORS
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:4173',
-  process.env.CLIENT_ORIGIN, // set in Vercel env vars to front-end URL
-].filter(Boolean);
-
+// CORS
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) return cb(null, true);
-    cb(new Error('Not allowed by CORS'));
-  },
+  origin: true, // Dynamically reflects request origin
   credentials: true
 }));
 
