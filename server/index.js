@@ -72,15 +72,18 @@ const authLimiter = rateLimit({
 });
 
 // Routes
-app.use('/api/auth', authLimiter, authRoutes);
-app.use('/api/events', eventsRoutes);
-app.use('/api/events', contributionsRoutes);
-app.use('/api/events', expensesRoutes);
-app.use('/api/friends', friendsRoutes);
-app.use('/api/events', reportsRoutes);
+const apiRouter = express.Router();
+apiRouter.use('/auth', authLimiter, authRoutes);
+apiRouter.use('/events', eventsRoutes);
+apiRouter.use('/events', contributionsRoutes);
+apiRouter.use('/events', expensesRoutes);
+apiRouter.use('/friends', friendsRoutes);
+apiRouter.use('/events', reportsRoutes);
+apiRouter.get('/health', (req, res) => res.json({ status: 'ok', message: 'Vercel Lambda Alive' }));
 
-// Health check
-app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'Vercel Lambda Alive' }));
+app.use('/api', apiRouter); // For local dev and when prefix is preserved
+app.use('/', apiRouter);    // For Vercel when prefix is stripped
+
 
 // 3. GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {
