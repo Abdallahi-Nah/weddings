@@ -175,7 +175,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   });
 
   const page = await browser.newPage();
-  await page.setContent(html, { waitUntil: 'networkidle0' });
+  await page.setContent(html, { waitUntil: 'networkidle0', timeout: 15000 });
 
   const pdfRaw = await page.pdf({
     format: 'A4',
