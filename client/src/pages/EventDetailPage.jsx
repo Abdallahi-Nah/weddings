@@ -34,7 +34,7 @@ export default function EventDetailPage() {
   const [report, setReport] = useState(null);
   const [tab, setTab] = useState('contributions');
   const [loading, setLoading] = useState(true);
-  const [pdfLoading, setPdfLoading] = useState(false);
+  const pdfLoading = false;
   const [contribModal, setContribModal] = useState(null); // null | 'add' | contrib obj (edit)
   const [expenseModal, setExpenseModal] = useState(null);
   const [confirmItem, setConfirmItem] = useState(null); // { type, item }
@@ -111,39 +111,11 @@ export default function EventDetailPage() {
     } catch { toast.error(t('common.error')); }
   };
 
-  const handlePdfExport = async () => {
-    setPdfLoading(true);
-    try {
-      const token = localStorage.getItem('weddingToken');
-      const normalizedLang = (i18n.language || 'en').split('-')[0].substring(0, 2);
-      const rawUrl = getPdfUrl(id, normalizedLang);
-      const fullUrl = `${rawUrl}&token=${token}`;
-      const response = await fetch(fullUrl);
-      if (!response.ok) {
-        const errText = await response.text();
-        console.error('PDF error:', errText);
-        throw new Error('PDF generation failed');
-      }
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      const safeTitle = (event.title || 'report').replace(/[^a-zA-Z0-9\u0600-\u06FF_\-]/g, '_');
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = `${safeTitle}-${i18n.language}.pdf`;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(blobUrl);
-      }, 1000);
-      toast.success(t('report.pdfReady'));
-    } catch (err) {
-      console.error(err);
-      toast.error(t('common.error'));
-    } finally {
-      setPdfLoading(false);
-    }
+  const handlePdfExport = () => {
+    const token = localStorage.getItem('weddingToken');
+    const normalizedLang = (i18n.language || 'en').split('-')[0].substring(0, 2);
+    const pdfUrl = getPdfUrl(id, normalizedLang) + '&token=' + token;
+    window.open(pdfUrl, '_blank');
   };
 
   if (loading) return <div className="spinner" />;
