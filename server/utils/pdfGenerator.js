@@ -1,10 +1,5 @@
 const path = require('path');
-const fs = require('fs');
 const ejs = require('ejs');
-
-const CAIRO_FACE_CSS_PATH = path.join(__dirname, '../assets/fonts/cairo-face.css');
-let cairoFaceCSS = '';
-try { cairoFaceCSS = fs.readFileSync(CAIRO_FACE_CSS_PATH, 'utf-8'); } catch(e) {}
 
 const translations = {
   ar: {
@@ -140,7 +135,6 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
     totalSpent,
     balance,
     generatedByText,
-    cairoFaceCSS,
     dateLine: formatDate(eventData.eventDate, lang),
     genLine: formatDatetime(new Date(), lang),
     formatMRU,
