@@ -79,6 +79,11 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: -1px;
+      white-space: nowrap;
+    }
+    .summary-box span:last-child {
+      text-align: end;
+      min-width: 100px;
     }
     .summary-box.final {
       background: <%= balance >= 0 ? '#e8f5ee' : '#fdecea' %>;
@@ -106,8 +111,8 @@
   
   <div class="meta">
     <div><strong><%= t.groomName %>:</strong> <%= eventData.groomName %></div>
-    <div><strong><%= t.eventDate %>:</strong> <bdi><%= dateLine %></bdi></div>
-    <div><strong><%= t.generatedAt %>:</strong> <bdi><%= genLine %></bdi></div>
+    <div><strong><%= t.eventDate %>:</strong> <span dir="ltr"><%= dateLine %></span></div>
+    <div><strong><%= t.generatedAt %>:</strong> <span dir="ltr"><%= genLine %></span></div>
   </div>
 
   <div class="content">
@@ -123,12 +128,12 @@
         <% contributions.forEach(c => { %>
           <tr>
             <td><%= c.friendName %></td>
-            <td class="money"><bdi><%= formatMRU(c.amount, lang) %></bdi></td>
+            <td class="money"><span dir="ltr"><%= formatMRU(c.amount, lang) %></span></td>
           </tr>
         <% }) %>
         <tr class="total-row">
           <td><%= t.total %></td>
-          <td class="money"><bdi><%= formatMRU(totalCollected, lang) %></bdi></td>
+          <td class="money"><span dir="ltr"><%= formatMRU(totalCollected, lang) %></span></td>
         </tr>
       </tbody>
     </table>
@@ -149,13 +154,13 @@
               <%= e.name %>
               <% if (e.notes) { %><br><small>(<%= e.notes %>)</small><% } %>
             </td>
-            <td><bdi><%= formatDatetime(e.datetime, lang) %></bdi></td>
-            <td class="money"><bdi><%= formatMRU(e.amount, lang) %></bdi></td>
+            <td><span dir="ltr"><%= formatDatetime(e.datetime, lang) %></span></td>
+            <td class="money"><span dir="ltr"><%= formatMRU(e.amount, lang) %></span></td>
           </tr>
         <% }) %>
         <tr class="total-row">
           <td colspan="2"><%= t.total %></td>
-          <td class="money"><bdi><%= formatMRU(totalSpent, lang) %></bdi></td>
+          <td class="money"><span dir="ltr"><%= formatMRU(totalSpent, lang) %></span></td>
         </tr>
       </tbody>
     </table>
@@ -163,15 +168,15 @@
     <div class="section-title"><%= t.summarySection %></div>
     <div class="summary-box">
       <span><%= t.totalCollected %></span>
-      <span style="color: #2a7a4f;"><bdi><%= formatMRU(totalCollected, lang) %></bdi></span>
+      <span style="color: #2a7a4f;"><span dir="ltr"><%= formatMRU(totalCollected, lang) %></span></span>
     </div>
     <div class="summary-box">
       <span><%= t.totalSpent %></span>
-      <span style="color: #c0392b;"><bdi><%= formatMRU(totalSpent, lang) %></bdi></span>
+      <span style="color: #c0392b;"><span dir="ltr"><%= formatMRU(totalSpent, lang) %></span></span>
     </div>
     <div class="summary-box final">
       <span><%= t.balance %></span>
-      <span><bdi><%= formatMRU(balance, lang) %></bdi></span>
+      <span><span dir="ltr"><%= formatMRU(balance, lang) %></span></span>
     </div>
 
     <div class="footer"><%= generatedByText %></div>
