@@ -24,6 +24,9 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 
+// Explicit OPTIONS preflight handler for robust CORS
+app.options('*', cors());
+
 app.use(express.json());
 
 // Request Logger
