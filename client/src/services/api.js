@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = '/api'; // Force relative path so it correctly hits the same Vercel deployment
+const API_BASE = 'https://weddings-tau.vercel.app'; // Production API server
 
 const api = axios.create({
   baseURL: API_BASE,
