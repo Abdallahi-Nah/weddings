@@ -10,7 +10,7 @@
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "bcryptjs": "^2.4.3",
-    "@sparticuz/chromium": "^133.0.0",
+    "@sparticuz/chromium": "^149.0.0",
     "puppeteer-core": "^25.3.0",
     "pdfkit": "^0.15.0",
     "pdfkit-table": "^0.1.99",

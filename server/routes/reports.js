@@ -54,7 +54,7 @@ router.get('/:eventId/report/pdf', async (req, res) => {
   } catch (err) {
     console.error('PDF generation error:', err);
     if (!res.headersSent) {
-      res.status(500).json({ error: 'PDF generation failed' });
+      res.status(500).json({ error: 'PDF generation failed', details: err.message });
     }
   }
 });

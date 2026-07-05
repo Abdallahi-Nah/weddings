@@ -61,4 +61,4 @@ export const deleteFriend = (id) => api.delete(`/friends/${id}`);
 
 // Reports
 export const getReport = (eventId) => api.get(`/events/${eventId}/report`);
-export const getPdfUrl = (eventId, lang) => `${API_BASE}/events/${eventId}/report/pdf?lang=${lang}`;
+export const getPdfUrl = (eventId, lang) => `${API_BASE}/api/events/${eventId}/report/pdf?lang=${lang}`;

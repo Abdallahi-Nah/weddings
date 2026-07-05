@@ -155,13 +155,11 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   let executablePath, browserArgs;
 
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
-    // Serverless: use @sparticuz/chromium
     const chromium = require('@sparticuz/chromium');
-    chromium.setHeadlessMode = true;
+    chromium.setGraphicsMode = false;
     executablePath = await chromium.executablePath();
-    browserArgs = chromium.args;
+    browserArgs = await puppeteerCore.defaultArgs({ args: chromium.args, headless: 'shell' });
   } else {
-    // Local development: use installed Chrome/Chromium
     executablePath =
       process.env.CHROME_EXECUTABLE_PATH ||
       '/usr/bin/google-chrome' ||
@@ -173,7 +171,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   const browser = await puppeteerCore.launch({
     executablePath,
     args: browserArgs,
-    headless: true,
+    headless: 'shell',
   });
 
   const page = await browser.newPage();
