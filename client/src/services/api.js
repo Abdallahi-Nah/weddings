@@ -15,11 +15,11 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 -> logout
+// Handle 401 -> logout (except on login endpoint where the UI handles the error)
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    if (error.response?.status === 401 && !error.config.url?.includes('/auth/login')) {
       localStorage.removeItem('weddingToken');
       window.location.href = '/login';
     }
