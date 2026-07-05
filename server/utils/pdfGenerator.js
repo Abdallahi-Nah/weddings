@@ -151,7 +151,7 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   const templatePath = path.join(__dirname, '../templates/report.ejs');
   const html = await ejs.renderFile(templatePath, templateData);
 
-  const puppeteerCore = require('puppeteer-core');
+  const puppeteerCore = await import('puppeteer-core');
   let executablePath, browserArgs;
 
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
