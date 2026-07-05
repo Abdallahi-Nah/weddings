@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const ejs = require('ejs');
-const puppeteer = require('puppeteer');
+const puppeteerCore = require('puppeteer-core');
 
 const CAIRO_FACE_CSS_PATH = path.join(__dirname, '../assets/fonts/cairo-face.css');
 let cairoFaceCSS = '';
@@ -152,10 +152,28 @@ async function generateReport(res, eventData, contributions, expenses, lang = 'e
   const templatePath = path.join(__dirname, '../templates/report.ejs');
   const html = await ejs.renderFile(templatePath, templateData);
 
-  const browser = await puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    headless: "new"
+  let executablePath, browserArgs;
+
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    // Serverless: use @sparticuz/chromium
+    const chromium = require('@sparticuz/chromium');
+    chromium.setHeadlessMode = true;
+    executablePath = await chromium.executablePath();
+    browserArgs = chromium.args;
+  } else {
+    // Local development: use installed Chrome/Chromium
+    executablePath =
+      process.env.CHROME_EXECUTABLE_PATH ||
+      '/usr/bin/google-chrome' ||
+      '/usr/bin/chromium-browser' ||
+      '/usr/bin/chromium';
+    browserArgs = ['--no-sandbox', '--disable-setuid-sandbox'];
+  }
+
+  const browser = await puppeteerCore.launch({
+    executablePath,
+    args: browserArgs,
+    headless: true,
   });
 
   const page = await browser.newPage();

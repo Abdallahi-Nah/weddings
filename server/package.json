@@ -9,6 +9,7 @@
     "seed": "node scripts/seed.js"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^149.0.0",
     "arabic-reshaper": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -19,9 +20,10 @@
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.1",
+    "@sparticuz/chromium": "^133.0.0",
     "pdfkit": "^0.15.0",
     "pdfkit-table": "^0.1.99",
-    "puppeteer": "^22.15.0",
+    "puppeteer-core": "^25.3.0",
     "serverless-http": "^4.0.0"
   },
   "devDependencies": {
