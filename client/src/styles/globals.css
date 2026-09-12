@@ -725,7 +725,13 @@ p  { line-height: 1.6; }
 .mb-12 { margin-bottom: 12px; }
 
 /* ─── RTL UTILITIES ─────────────────────────────────── */
-[dir="rtl"] .bottom-nav { flex-direction: row-reverse; }
+/* .bottom-nav is intentionally NOT reversed here: in a dir="rtl"
+   container, `flex-direction: row` already places the first item
+   (Home) at the right and the last (Settings) at the left, which is
+   the correct/expected order. Reversing it would put Home on the
+   left and also throw off the FAB-clearance margins on the two
+   middle tabs (which rely on logical inline-start/end matching the
+   document direction, not a flipped flex axis). */
 [dir="rtl"] .row-right { align-items: flex-start; }
 [dir="rtl"] .row-actions { flex-direction: row-reverse; }
 [dir="rtl"] .page-header-row { flex-direction: row-reverse; }
