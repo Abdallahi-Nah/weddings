@@ -263,6 +263,7 @@ export default function EventDetailPage() {
                 {t('report.contributions')} ({report.contributions.length})
               </div>
               <div className="card" style={{ padding: 0, overflow: 'hidden', marginBottom: 16 }}>
+                <div className="report-table-wrap">
                 <table className="report-table">
                   <thead>
                     <tr>
@@ -283,12 +284,14 @@ export default function EventDetailPage() {
                     </tr>
                   </tbody>
                 </table>
+                </div>
               </div>
 
               <div style={{ fontWeight: 700, fontSize: '0.88rem', marginBottom: 8, color: 'var(--text-mid)' }}>
                 {t('report.expenses')} ({report.expenses.length})
               </div>
               <div className="card" style={{ padding: 0, overflow: 'hidden', marginBottom: 16 }}>
+                <div className="report-table-wrap">
                 <table className="report-table">
                   <thead>
                     <tr>
@@ -312,6 +315,7 @@ export default function EventDetailPage() {
                     </tr>
                   </tbody>
                 </table>
+                </div>
               </div>
 
               <div style={{ fontWeight: 700, fontSize: '0.88rem', marginBottom: 8, color: 'var(--text-mid)' }}>{t('report.summary')}</div>

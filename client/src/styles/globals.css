@@ -2,30 +2,35 @@
 
 /* ─── CSS VARIABLES ─────────────────────────────────── */
 :root {
-  --cream: #f5f0e8;
-  --cream-dark: #ece6d9;
-  --cream-border: #ddd8cc;
-  --green: #1a5738;
-  --green-light: #2a7a4f;
-  --green-pale: #e8f5ee;
-  --green-chip: #c8f0d8;
-  --red: #c0392b;
-  --red-pale: #fdecea;
-  --text-dark: #1a1a0f;
-  --text-mid: #4a4a3a;
-  --text-light: #8a8a7a;
-  --pastel-pink: #fce4ec;
-  --pastel-mint: #e0f7f0;
-  --pastel-lavender: #ede7f6;
-  --pastel-blue: #e3f2fd;
-  --pastel-amber: #fff8e1;
+  --primary: #6C63FF;
+  --primary-light: #8B84FF;
+  --primary-dark: #5347D6;
+  --primary-pale: #EEECFF;
+  --primary-chip: #DAD5FF;
+  --cream: #F4F5FC;
+  --cream-dark: #ECEEFA;
+  --cream-border: #E4E6F4;
+  --green: #22C55E;
+  --green-light: #16A34A;
+  --green-pale: #E7F9EE;
+  --green-chip: #CFF7DC;
+  --red: #F0455A;
+  --red-pale: #FFE9EC;
+  --text-dark: #1A1B25;
+  --text-mid: #6E7191;
+  --text-light: #A0A3BD;
+  --pastel-pink: #FFE1EC;
+  --pastel-mint: #DDFBEF;
+  --pastel-lavender: #EDEAFE;
+  --pastel-blue: #E3EEFF;
+  --pastel-amber: #FFF3DE;
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 24px;
   --radius-pill: 999px;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+  --shadow-sm: 0 2px 10px rgba(108,99,255,0.07);
+  --shadow-md: 0 6px 24px rgba(108,99,255,0.10);
+  --shadow-lg: 0 10px 36px rgba(108,99,255,0.16);
   --transition: 0.2s ease;
 }
 
@@ -65,27 +70,42 @@ p  { line-height: 1.6; }
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
   max-width: 480px;
   margin: 0 auto;
   position: relative;
   background: var(--cream);
+  /* Establishes a containing block for fixed-position descendants
+     (.bottom-nav, .fab, modals) so they stay anchored to this card
+     instead of the browser viewport once the shell is no longer
+     full-width on tablet/desktop screens. */
+  transform: translateZ(0);
 }
 
-/* ─── TOP BAR (dynamic island) ─────────────────────── */
+/* On roomier screens, give the phone-style shell a visible edge and
+   a touch more breathing room instead of blending into the page. */
+@media (min-width: 600px) {
+  .app-shell {
+    max-width: 480px;
+    min-height: calc(100vh - 48px);
+    margin-block: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+}
+
+/* ─── TOP BAR ────────────────────────────────────────── */
 .top-bar {
   position: sticky;
   top: 0;
   z-index: 100;
   background: var(--cream);
-  padding: 0 16px;
+  padding: env(safe-area-inset-top, 0px) 16px 0;
 }
 
 .dynamic-island {
-  background: #111;
-  border-radius: var(--radius-pill);
-  height: 36px;
-  width: 120px;
-  margin: 10px auto 0;
+  display: none;
 }
 
 /* ─── PAGE HEADER ───────────────────────────────────── */
@@ -103,7 +123,7 @@ p  { line-height: 1.6; }
 .header-avatar {
   width: 44px; height: 44px;
   border-radius: var(--radius-pill);
-  background: var(--green);
+  background: var(--primary);
   display: flex; align-items: center; justify-content: center;
   color: #fff; font-size: 1.2rem; font-weight: 700;
   flex-shrink: 0;
@@ -138,7 +158,7 @@ p  { line-height: 1.6; }
 /* ─── BOTTOM NAV ────────────────────────────────────── */
 .bottom-nav {
   position: fixed;
-  bottom: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
@@ -160,7 +180,7 @@ p  { line-height: 1.6; }
   align-items: center;
   gap: 3px;
   cursor: pointer;
-  padding: 8px 14px;
+  padding: 8px 10px;
   border-radius: var(--radius-pill);
   border: none;
   background: transparent;
@@ -171,18 +191,35 @@ p  { line-height: 1.6; }
   flex: 1;
   text-decoration: none;
 }
-.nav-item:hover { color: var(--green); }
+.nav-item:hover { color: var(--primary); }
 .nav-item.active {
-  background: #111;
-  color: #fff;
+  background: transparent;
+  color: var(--primary);
 }
 .nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
+
+/* Give the two inner tabs a little breathing room from the centered
+   FAB above, so its footprint never sits on top of a nav icon even
+   on the narrowest phones. */
+.nav-item:nth-child(2) { margin-inline-end: 10px; }
+.nav-item:nth-child(3) { margin-inline-start: 10px; }
 
 /* ─── MAIN CONTENT ──────────────────────────────────── */
 .main-content {
   flex: 1;
-  padding: 8px 16px 100px;
+  padding: 8px 16px calc(100px + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Small phones (e.g. iPhone SE / older Android at 320-360px wide) */
+@media (max-width: 360px) {
+  .page-header { padding: 12px 14px 16px; }
+  .main-content { padding: 8px 12px calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .card, .event-card { padding: 14px; }
+  .totals-banner { padding: 14px 10px; }
+  .totals-banner .t-value { font-size: 0.88rem; }
+  .modal-sheet { padding: 20px 14px 32px; }
 }
 
 /* ─── SECTION HEADER ────────────────────────────────── */
@@ -194,7 +231,7 @@ p  { line-height: 1.6; }
   margin-top: 20px;
 }
 .section-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
-.view-all { font-size: 0.78rem; color: var(--green); font-weight: 600; text-decoration: none; cursor: pointer; }
+.view-all { font-size: 0.78rem; color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; }
 .view-all:hover { text-decoration: underline; }
 
 /* ─── CARDS ─────────────────────────────────────────── */
@@ -209,7 +246,7 @@ p  { line-height: 1.6; }
 .card:hover { box-shadow: var(--shadow-md); }
 
 .card-green {
-  background: var(--green);
+  background: var(--primary);
   border-radius: var(--radius-lg);
   padding: 20px;
   color: #fff;
@@ -231,7 +268,7 @@ p  { line-height: 1.6; }
   gap: 10px;
 }
 .event-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.event-card.active-event { border-color: var(--green); border-width: 2px; }
+.event-card.active-event { border-color: var(--primary); border-width: 2px; }
 
 /* ─── STATUS PILLS ──────────────────────────────────── */
 .status-pill {
@@ -261,8 +298,8 @@ p  { line-height: 1.6; }
 }
 .list-row:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
 .list-row.confirmed {
-  background: var(--green);
-  border-color: var(--green);
+  background: var(--primary);
+  border-color: var(--primary);
   color: #fff;
 }
 .list-row.confirmed .row-name { color: #fff; }
@@ -320,7 +357,7 @@ p  { line-height: 1.6; }
 
 /* ─── TOTALS BANNER ─────────────────────────────────── */
 .totals-banner {
-  background: var(--green);
+  background: var(--primary);
   border-radius: var(--radius-lg);
   padding: 16px 20px;
   display: flex;
@@ -356,7 +393,7 @@ p  { line-height: 1.6; }
   color: var(--text-light);
 }
 .tab-btn.active {
-  background: #111;
+  background: var(--primary);
   color: #fff;
   box-shadow: var(--shadow-sm);
 }
@@ -384,9 +421,9 @@ p  { line-height: 1.6; }
   border: 1px solid var(--cream-border);
 }
 .filter-tab.active {
-  background: #111;
+  background: var(--primary);
   color: #fff;
-  border-color: #111;
+  border-color: var(--primary);
 }
 
 /* ─── FORMS / MODALS ────────────────────────────────── */
@@ -439,7 +476,7 @@ p  { line-height: 1.6; }
   transition: border-color var(--transition);
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--green);
+  border-color: var(--primary);
 }
 .form-textarea { min-height: 72px; resize: vertical; }
 
@@ -463,7 +500,7 @@ p  { line-height: 1.6; }
   color: var(--text-dark);
   transition: background var(--transition);
 }
-.autocomplete-item:hover { background: var(--green-pale); color: var(--green); }
+.autocomplete-item:hover { background: var(--primary-pale); color: var(--primary); }
 
 /* ─── BUTTONS ───────────────────────────────────────── */
 .btn {
@@ -484,8 +521,8 @@ p  { line-height: 1.6; }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .btn:active:not(:disabled) { transform: scale(0.97); }
 
-.btn-primary { background: #111; color: #fff; }
-.btn-primary:hover:not(:disabled) { background: #333; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
 
 .btn-green { background: var(--green); color: #fff; }
 .btn-green:hover:not(:disabled) { background: var(--green-light); }
@@ -512,27 +549,32 @@ p  { line-height: 1.6; }
 .btn-icon:hover:not(:disabled) { background: var(--cream-border); }
 .btn-icon.danger:hover:not(:disabled) { background: var(--red-pale); color: var(--red); }
 
-/* ─── FAB ───────────────────────────────────────────── */
+/* ─── FAB (floats above the bottom nav, centered, like a diet-app
+   "quick action" button that overlaps the tab bar) ─────────────── */
 .fab {
   position: fixed;
-  bottom: 86px;
-  right: 20px;
-  width: 52px; height: 52px;
+  bottom: calc(46px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px; height: 56px;
   border-radius: var(--radius-pill);
-  background: var(--green);
+  background: var(--primary);
   color: #fff;
-  border: none;
+  border: 4px solid var(--cream);
   font-size: 1.5rem;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 150;
-  transition: all var(--transition);
+  z-index: 250;
+  transition: background var(--transition), transform var(--transition) ease;
 }
-.fab:hover { background: var(--green-light); transform: scale(1.05); }
-[dir="rtl"] .fab { right: auto; left: 20px; }
+.fab:hover { background: var(--primary-dark); transform: translateX(-50%) scale(1.05); }
+
+@media (max-width: 360px) {
+  .fab { width: 48px; height: 48px; font-size: 1.3rem; border-width: 3px; }
+}
 
 /* ─── CONFIRM DIALOG ────────────────────────────────── */
 .confirm-dialog {
@@ -569,7 +611,7 @@ p  { line-height: 1.6; }
 }
 .login-logo {
   width: 64px; height: 64px;
-  background: var(--green);
+  background: var(--primary);
   border-radius: var(--radius-lg);
   margin: 0 auto 20px;
   display: flex;
@@ -592,14 +634,20 @@ p  { line-height: 1.6; }
 .empty-state .empty-sub { font-size: 0.8rem; }
 
 /* ─── REPORT ────────────────────────────────────────── */
+.report-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .report-table {
   width: 100%;
+  min-width: 320px;
   border-collapse: collapse;
   font-size: 0.82rem;
   margin-bottom: 16px;
 }
 .report-table th {
-  background: var(--green);
+  background: var(--primary);
   color: #fff;
   padding: 9px 12px;
   font-weight: 700;
@@ -635,7 +683,7 @@ p  { line-height: 1.6; }
 .spinner {
   width: 32px; height: 32px;
   border: 3px solid var(--cream-border);
-  border-top-color: var(--green);
+  border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin: 48px auto;
@@ -662,7 +710,7 @@ p  { line-height: 1.6; }
   background: transparent;
   color: var(--text-mid);
 }
-.lang-btn.active { background: #111; color: #fff; }
+.lang-btn.active { background: var(--primary); color: #fff; }
 
 /* ─── UTILITIES ─────────────────────────────────────── */
 .flex { display: flex; }
