@@ -155,23 +155,20 @@ p  { line-height: 1.6; }
 .stat-chip.green { background: var(--green-pale); color: var(--green); border-color: var(--green-chip); }
 .stat-chip.red   { background: var(--red-pale);  color: var(--red);   border-color: #f5c6c1; }
 
-/* ─── BOTTOM NAV ────────────────────────────────────── */
+/* ─── BOTTOM NAV (full-width, docked bar like WhatsApp) ─────────── */
 .bottom-nav {
   position: fixed;
-  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   background: #fff;
-  border-radius: var(--radius-pill);
-  padding: 10px 20px;
+  padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
   display: flex;
-  gap: 8px;
   align-items: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   z-index: 200;
-  border: 1px solid var(--cream-border);
-  max-width: 360px;
-  width: calc(100% - 48px);
+  border-top: 1px solid var(--cream-border);
 }
 
 .nav-item {
@@ -180,8 +177,8 @@ p  { line-height: 1.6; }
   align-items: center;
   gap: 3px;
   cursor: pointer;
-  padding: 8px 10px;
-  border-radius: var(--radius-pill);
+  padding: 8px 4px;
+  border-radius: var(--radius-md);
   border: none;
   background: transparent;
   color: var(--text-light);
@@ -199,16 +196,10 @@ p  { line-height: 1.6; }
 }
 .nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
 
-/* Give the two inner tabs a little breathing room from the centered
-   FAB above, so its footprint never sits on top of a nav icon even
-   on the narrowest phones. */
-.nav-item:nth-child(2) { margin-inline-end: 10px; }
-.nav-item:nth-child(3) { margin-inline-start: 10px; }
-
 /* ─── MAIN CONTENT ──────────────────────────────────── */
 .main-content {
   flex: 1;
-  padding: 8px 16px calc(100px + env(safe-area-inset-bottom, 0px));
+  padding: 8px 16px calc(76px + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -216,7 +207,7 @@ p  { line-height: 1.6; }
 /* Small phones (e.g. iPhone SE / older Android at 320-360px wide) */
 @media (max-width: 360px) {
   .page-header { padding: 12px 14px 16px; }
-  .main-content { padding: 8px 12px calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .main-content { padding: 8px 12px calc(72px + env(safe-area-inset-bottom, 0px)); }
   .card, .event-card { padding: 14px; }
   .totals-banner { padding: 14px 10px; }
   .totals-banner .t-value { font-size: 0.88rem; }
@@ -550,18 +541,16 @@ p  { line-height: 1.6; }
 .btn-icon:hover:not(:disabled) { background: var(--cream-border); }
 .btn-icon.danger:hover:not(:disabled) { background: var(--red-pale); color: var(--red); }
 
-/* ─── FAB (floats above the bottom nav, centered, like a diet-app
-   "quick action" button that overlaps the tab bar) ─────────────── */
+/* ─── FAB (floats above the full-width bottom nav) ─────────────── */
 .fab {
   position: fixed;
-  bottom: calc(46px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 56px; height: 56px;
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  right: 20px;
+  width: 52px; height: 52px;
   border-radius: var(--radius-pill);
   background: var(--primary);
   color: #fff;
-  border: 4px solid var(--cream);
+  border: none;
   font-size: 1.5rem;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
@@ -571,10 +560,11 @@ p  { line-height: 1.6; }
   z-index: 250;
   transition: background var(--transition), transform var(--transition) ease;
 }
-.fab:hover { background: var(--primary-dark); transform: translateX(-50%) scale(1.05); }
+.fab:hover { background: var(--primary-dark); transform: scale(1.05); }
+[dir="rtl"] .fab { right: auto; left: 20px; }
 
 @media (max-width: 360px) {
-  .fab { width: 48px; height: 48px; font-size: 1.3rem; border-width: 3px; }
+  .fab { width: 46px; height: 46px; font-size: 1.3rem; }
 }
 
 /* ─── CONFIRM DIALOG ────────────────────────────────── */
