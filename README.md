@@ -1,4 +1,4 @@
-# مدير صندوق الأعراس — Wedding Fund Manager
+# مدير صندوق الأعراس —  Wedding Fund Manager
 
 A **MERN-stack Progressive Web App** for managing group wedding contributions and expenses. Supports Arabic (RTL), French, and English.
 
