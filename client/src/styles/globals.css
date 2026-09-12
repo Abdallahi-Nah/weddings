@@ -193,8 +193,9 @@ p  { line-height: 1.6; }
 }
 .nav-item:hover { color: var(--primary); }
 .nav-item.active {
-  background: transparent;
-  color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
 }
 .nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
 
