@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { FabProvider } from './contexts/FabContext';
 
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
@@ -52,7 +53,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <AppRoutes />
+        <FabProvider>
+          <AppRoutes />
+        </FabProvider>
         <Toaster
           position="top-center"
           toastOptions={{

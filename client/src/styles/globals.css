@@ -76,9 +76,9 @@ p  { line-height: 1.6; }
   position: relative;
   background: var(--cream);
   /* Establishes a containing block for fixed-position descendants
-     (.bottom-nav, .fab, modals) so they stay anchored to this card
-     instead of the browser viewport once the shell is no longer
-     full-width on tablet/desktop screens. */
+     (.bottom-nav, modals) so they stay anchored to this card instead
+     of the browser viewport once the shell is no longer full-width
+     on tablet/desktop screens. */
   transform: translateZ(0);
 }
 
@@ -196,10 +196,33 @@ p  { line-height: 1.6; }
 }
 .nav-item .nav-icon { font-size: 1.2rem; line-height: 1; }
 
-/* Keep clear space under the raised center FAB so it never sits on
-   top of the two innermost tab icons. */
-.nav-item:nth-child(2) { margin-inline-end: 30px; }
-.nav-item:nth-child(3) { margin-inline-start: 30px; }
+/* The quick-add button: a real flex slot in the bar (so the bar still
+   divides evenly — into 5 equal shares instead of 4 while it's shown),
+   drawn as a raised, prominent circle that pops above the bar line. */
+.nav-fab {
+  flex: 1;
+  max-width: 84px;
+  aspect-ratio: 1;
+  margin: -22px auto 0;
+  border: 4px solid var(--cream);
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 5;
+  transition: background var(--transition), transform var(--transition) ease;
+}
+.nav-fab:hover { background: var(--primary-dark); transform: scale(1.05); }
+
+@media (max-width: 360px) {
+  .nav-fab { max-width: 64px; font-size: 1.3rem; border-width: 3px; margin-top: -18px; }
+}
 
 /* ─── MAIN CONTENT ──────────────────────────────────── */
 .main-content {
@@ -545,33 +568,6 @@ p  { line-height: 1.6; }
 }
 .btn-icon:hover:not(:disabled) { background: var(--cream-border); }
 .btn-icon.danger:hover:not(:disabled) { background: var(--red-pale); color: var(--red); }
-
-/* ─── FAB (centered on the bottom nav, raised above it so it sits
-   between the two left tabs and the two right tabs) ─────────────── */
-.fab {
-  position: fixed;
-  bottom: calc(34px + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px; height: 60px;
-  border-radius: var(--radius-pill);
-  background: var(--primary);
-  color: #fff;
-  border: 4px solid var(--cream);
-  font-size: 1.6rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 250;
-  transition: background var(--transition), transform var(--transition) ease;
-}
-.fab:hover { background: var(--primary-dark); transform: translateX(-50%) scale(1.05); }
-
-@media (max-width: 360px) {
-  .fab { width: 52px; height: 52px; font-size: 1.4rem; border-width: 3px; }
-}
 
 /* ─── CONFIRM DIALOG ────────────────────────────────── */
 .confirm-dialog {

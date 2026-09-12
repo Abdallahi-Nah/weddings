@@ -11,6 +11,7 @@ import {
 import ConfirmDialog from '../components/ConfirmDialog';
 import ContributionModal from '../components/ContributionModal';
 import ExpenseModal from '../components/ExpenseModal';
+import { useFab } from '../contexts/FabContext';
 
 function formatMRU(amount) {
   return new Intl.NumberFormat().format(Math.round(amount)) + ' MRU';
@@ -38,6 +39,7 @@ export default function EventDetailPage() {
   const [contribModal, setContribModal] = useState(null); // null | 'add' | contrib obj (edit)
   const [expenseModal, setExpenseModal] = useState(null);
   const [confirmItem, setConfirmItem] = useState(null); // { type, item }
+  const { showFab, hideFab } = useFab();
 
   const loadAll = useCallback(async () => {
     setLoading(true);
@@ -63,6 +65,18 @@ export default function EventDetailPage() {
   const balance = totalCollected - totalSpent;
 
   const isClosed = event?.status === 'closed';
+
+  useEffect(() => {
+    if (isClosed) { hideFab(); return undefined; }
+    if (tab === 'contributions') {
+      showFab({ icon: '+', onClick: () => setContribModal('add'), title: t('contributions.add'), id: 'add-contrib-fab' });
+    } else if (tab === 'expenses') {
+      showFab({ icon: '+', onClick: () => setExpenseModal('add'), title: t('expenses.add'), id: 'add-expense-fab' });
+    } else {
+      hideFab();
+    }
+    return () => hideFab();
+  }, [tab, isClosed, showFab, hideFab, t]);
 
   const handleContribSave = async (data) => {
     try {
@@ -202,9 +216,6 @@ export default function EventDetailPage() {
               </div>
             ))
           )}
-          {!isClosed && (
-            <button className="fab" onClick={() => setContribModal('add')} id="add-contrib-fab" title={t('contributions.add')}>+</button>
-          )}
         </>
       )}
 
@@ -237,9 +248,6 @@ export default function EventDetailPage() {
                 </div>
               </div>
             ))
-          )}
-          {!isClosed && (
-            <button className="fab" onClick={() => setExpenseModal('add')} id="add-expense-fab" title={t('expenses.add')}>+</button>
           )}
         </>
       )}
