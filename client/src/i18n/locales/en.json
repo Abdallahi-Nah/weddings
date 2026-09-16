@@ -112,7 +112,13 @@
     "totalCollected": "Total Collected",
     "totalSpent": "Total Spent",
     "balance": "Remaining Balance",
-    "pdfReady": "Report downloaded successfully"
+    "pdfReady": "Report downloaded successfully",
+    "unpaidFriends": "Friends who haven't paid",
+    "downloadUnpaid": "Download unpaid list (PNG)",
+    "unpaidCount": "Count",
+    "unpaidEmpty": "All friends have contributed 🎉",
+    "unpaidFooter": "List of friends who haven't contributed yet",
+    "unpaidDownloaded": "Image downloaded successfully"
   },
   "friends": {
     "title": "Friends List",

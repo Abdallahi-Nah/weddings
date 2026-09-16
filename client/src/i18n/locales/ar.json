@@ -112,7 +112,13 @@
     "totalCollected": "إجمالي المجموع",
     "totalSpent": "إجمالي المصروف",
     "balance": "الرصيد المتبقي",
-    "pdfReady": "تم تنزيل التقرير بنجاح"
+    "pdfReady": "تم تنزيل التقرير بنجاح",
+    "unpaidFriends": "الأصدقاء الذين لم يدفعوا",
+    "downloadUnpaid": "تحميل قائمة من لم يدفعوا",
+    "unpaidCount": "العدد",
+    "unpaidEmpty": "جميع الأصدقاء ساهموا 🎉",
+    "unpaidFooter": "قائمة الأصدقاء الذين لم يقدّموا مساهمتهم بعد",
+    "unpaidDownloaded": "تم تنزيل الصورة بنجاح"
   },
   "friends": {
     "title": "قائمة الأصدقاء",

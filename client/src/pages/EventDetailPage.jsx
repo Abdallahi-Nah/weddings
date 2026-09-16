@@ -6,12 +6,13 @@ import {
   getEvent, toggleEventStatus,
   getContributions, createContribution, updateContribution, deleteContribution,
   getExpenses, createExpense, updateExpense, deleteExpense,
-  getReport, getPdfUrl
+  getReport, getPdfUrl, getFriends
 } from '../services/api';
 import ConfirmDialog from '../components/ConfirmDialog';
 import ContributionModal from '../components/ContributionModal';
 import ExpenseModal from '../components/ExpenseModal';
 import { useFab } from '../contexts/FabContext';
+import { downloadUnpaidFriendsPng } from '../utils/unpaidFriendsPng';
 
 function formatMRU(amount) {
   return new Intl.NumberFormat().format(Math.round(amount)) + ' MRU';
@@ -32,6 +33,7 @@ export default function EventDetailPage() {
   const [event, setEvent] = useState(null);
   const [contributions, setContributions] = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [report, setReport] = useState(null);
   const [tab, setTab] = useState('contributions');
   const [loading, setLoading] = useState(true);
@@ -43,12 +45,13 @@ export default function EventDetailPage() {
 
   const loadAll = useCallback(async () => {
     setLoading(true);
-    const [evRes, cRes, eRes] = await Promise.all([
-      getEvent(id), getContributions(id), getExpenses(id)
+    const [evRes, cRes, eRes, fRes] = await Promise.all([
+      getEvent(id), getContributions(id), getExpenses(id), getFriends()
     ]);
     setEvent(evRes.data);
     setContributions(cRes.data);
     setExpenses(eRes.data);
+    setFriends(fRes.data);
     setLoading(false);
   }, [id]);
 
@@ -65,6 +68,25 @@ export default function EventDetailPage() {
   const balance = totalCollected - totalSpent;
 
   const isClosed = event?.status === 'closed';
+
+  const paidNames = new Set(contributions.map(c => c.friendName.trim().toLowerCase()));
+  const unpaidFriends = friends.filter(f => !paidNames.has(f.name.trim().toLowerCase()));
+
+  const handleDownloadUnpaid = () => {
+    downloadUnpaidFriendsPng({
+      event,
+      names: unpaidFriends.map(f => f.name),
+      lang: (i18n.language || 'en').split('-')[0],
+      labels: {
+        title: t('report.unpaidFriends'),
+        count: t('report.unpaidCount'),
+        empty: t('report.unpaidEmpty'),
+        footer: t('report.unpaidFooter'),
+        filePrefix: t('report.unpaidFriends'),
+      },
+    });
+    toast.success(t('report.unpaidDownloaded'));
+  };
 
   useEffect(() => {
     if (isClosed) { hideFab(); return undefined; }
@@ -263,6 +285,15 @@ export default function EventDetailPage() {
             id="export-pdf-btn"
           >
             📄 {pdfLoading ? t('report.generating') : t('report.export')}
+          </button>
+
+          <button
+            className="btn btn-primary w-full"
+            style={{ marginBottom: 20 }}
+            onClick={handleDownloadUnpaid}
+            id="export-unpaid-png-btn"
+          >
+            🖼️ {t('report.downloadUnpaid')} ({unpaidFriends.length})
           </button>
 
           {report && (
