@@ -46,7 +46,7 @@ export default function DashboardPage() {
         <CelebrationCannons
           key={celebration.id}
           message={celebration.message}
-          duration={5}
+          duration={10}
           onDone={() => setCelebration(null)}
         />
       )}
