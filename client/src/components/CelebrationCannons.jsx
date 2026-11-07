@@ -23,7 +23,7 @@ function makePieces(side, duration) {
   });
 }
 
-export default function CelebrationCannons({ name, message, duration = 3.2, solid = false, onDone }) {
+export default function CelebrationCannons({ name, message, subMessage, duration = 3.2, solid = false, onDone }) {
   const pieces = useMemo(
     () => [...makePieces('left', duration), ...makePieces('right', duration)],
     [duration]
@@ -57,7 +57,8 @@ export default function CelebrationCannons({ name, message, duration = 3.2, soli
         />
       ))}
       <div className={`celebration-msg${solid ? ' solid' : ''}`} dir="rtl" style={{ animationDuration: `${duration}s` }}>
-        {message || `أهيه ـ ${name} ـ ذاك طايب`}
+        {message || `شكرا ${name}`}
+        {subMessage && <div className="celebration-sub">{subMessage}</div>}
       </div>
     </div>,
     document.body

@@ -115,7 +115,14 @@ export default function EventDetailPage() {
       if (contribModal === 'add') {
         await createContribution(id, data);
         toast.success(t('contributions.added'));
-        setCelebration({ name: data.friendName, id: Date.now() });
+        const paid = new Set(paidNames);
+        paid.add(data.friendName.trim().toLowerCase());
+        const hasUnpaid = friends.some(f => !paid.has(f.name.trim().toLowerCase()));
+        setCelebration({
+          name: data.friendName,
+          subMessage: hasUnpaid ? 'اعكوبت خير للجماعة لي مزالت' : null,
+          id: Date.now(),
+        });
       } else {
         await updateContribution(id, contribModal._id, data);
         toast.success(t('contributions.updated'));
@@ -174,6 +181,8 @@ export default function EventDetailPage() {
         <CelebrationCannons
           key={celebration.id}
           name={celebration.name}
+          subMessage={celebration.subMessage}
+          solid
           onDone={() => setCelebration(null)}
         />
       )}

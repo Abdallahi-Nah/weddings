@@ -811,6 +811,11 @@ p  { line-height: 1.6; }
   text-shadow: none;
   box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
 }
+.celebration-sub {
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
 @keyframes celebration-pop {
   0% { opacity: 0; transform: translateX(-50%) scale(.6); }
   12% { opacity: 1; transform: translateX(-50%) scale(1.08); }
