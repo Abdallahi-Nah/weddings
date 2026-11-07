@@ -47,6 +47,7 @@ export default function DashboardPage() {
           key={celebration.id}
           message={celebration.message}
           duration={10}
+          solid
           onDone={() => setCelebration(null)}
         />
       )}

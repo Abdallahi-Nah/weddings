@@ -806,6 +806,11 @@ p  { line-height: 1.6; }
   text-align: center;
   animation: celebration-pop 3.2s ease forwards;
 }
+.celebration-msg.solid {
+  background: #fff;
+  text-shadow: none;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .18);
+}
 @keyframes celebration-pop {
   0% { opacity: 0; transform: translateX(-50%) scale(.6); }
   12% { opacity: 1; transform: translateX(-50%) scale(1.08); }
