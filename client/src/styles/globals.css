@@ -798,10 +798,11 @@ p  { line-height: 1.6; }
   max-width: 90vw;
   padding: 14px 22px;
   border-radius: 16px;
-  background: rgba(0, 0, 0, .78);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 700;
+  background: transparent;
+  color: var(--primary);
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-shadow: 0 0 6px #fff, 0 0 12px #fff, 0 2px 4px rgba(0, 0, 0, .25);
   text-align: center;
   animation: celebration-pop 3.2s ease forwards;
 }

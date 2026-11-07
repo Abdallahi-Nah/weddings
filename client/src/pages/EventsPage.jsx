@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { getEvents, createEvent, deleteEvent, toggleEventStatus } from '../services/api';
@@ -13,14 +13,19 @@ function formatMRU(amount) {
 export default function EventsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(!!location.state?.openForm);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   const load = () => getEvents().then(r => setEvents(r.data)).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
+  useEffect(() => {
+    // Evite de rouvrir le formulaire apres un refresh
+    if (location.state?.openForm) navigate('/events', { replace: true, state: null });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filtered = events.filter(e => filter === 'all' ? true : e.status === filter);
 
@@ -29,7 +34,7 @@ export default function EventsPage() {
       await createEvent(data);
       toast.success(t('events.created'));
       setShowForm(false);
-      navigate('/', { state: { celebration: { message: `تهانينا ـ ${data.groomName} ـ`, id: Date.now() } } });
+      navigate('/', { state: { celebration: { message: `تهانينا ${data.groomName}`, id: Date.now() } } });
     } catch (err) {
       toast.error(err.response?.data?.errors?.[0]?.msg || t('common.error'));
     }

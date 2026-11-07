@@ -118,7 +118,7 @@ export default function DashboardPage() {
         <div className="card" style={{ textAlign: 'center', padding: 28, marginBottom: 16 }}>
           <div style={{ fontSize: '2rem', marginBottom: 10 }}>💍</div>
           <div style={{ color: 'var(--text-light)', fontSize: '0.88rem', marginBottom: 14 }}>{t('dashboard.noActiveEvent')}</div>
-          <button className="btn btn-green" onClick={() => navigate('/events')} id="create-event-btn">
+          <button className="btn btn-green" onClick={() => navigate('/events', { state: { openForm: true } })} id="create-event-btn">
             + {t('dashboard.createEvent')}
           </button>
         </div>
