@@ -79,7 +79,6 @@ p  { line-height: 1.6; }
      (.bottom-nav, modals) so they stay anchored to this card instead
      of the browser viewport once the shell is no longer full-width
      on tablet/desktop screens. */
-  transform: translateZ(0);
 }
 
 /* On roomier screens, give the phone-style shell a visible edge and
@@ -169,6 +168,15 @@ p  { line-height: 1.6; }
   box-shadow: var(--shadow-md);
   z-index: 200;
   border-top: 1px solid var(--cream-border);
+}
+/* Sur grand ecran : garder la barre alignee sur la carte de 480px */
+@media (min-width: 600px) {
+  .bottom-nav {
+    left: 50%;
+    right: auto;
+    max-width: 480px;
+    transform: translateX(-50%);
+  }
 }
 
 .nav-item {
@@ -751,3 +759,56 @@ p  { line-height: 1.6; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--cream-border); border-radius: 4px; }
+
+/* ===== Celebration cannons ===== */
+.celebration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+.cannon {
+  position: absolute;
+  bottom: 12vh;
+  font-size: 3rem;
+}
+.cannon-left { left: 8px; transform: rotate(45deg); }
+.cannon-right { right: 8px; transform: scaleX(-1) rotate(45deg); }
+.confetti {
+  position: absolute;
+  bottom: 14vh;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fly 2.4s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.confetti-left { left: 40px; }
+.confetti-right { right: 40px; }
+@keyframes confetti-fly {
+  0% { opacity: 1; transform: translate(0, 0) rotate(0); }
+  45% { opacity: 1; transform: translate(calc(var(--dx) * .45), var(--dy)) rotate(calc(var(--rot) * .5)); }
+  100% { opacity: 0; transform: translate(calc(var(--dx) * .6), 40vh) rotate(var(--rot)); }
+}
+.celebration-msg {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90vw;
+  padding: 14px 22px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, .78);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  animation: celebration-pop 3.2s ease forwards;
+}
+@keyframes celebration-pop {
+  0% { opacity: 0; transform: translateX(-50%) scale(.6); }
+  12% { opacity: 1; transform: translateX(-50%) scale(1.08); }
+  20% { transform: translateX(-50%) scale(1); }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
