@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
@@ -33,6 +33,7 @@ export default function EventDetailPage() {
   const navigate = useNavigate();
   const [event, setEvent] = useState(null);
   const [celebration, setCelebration] = useState(null);
+  const contribEndRef = useRef(null);
   const [contributions, setContributions] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -101,6 +102,13 @@ export default function EventDetailPage() {
     }
     return () => hideFab();
   }, [tab, isClosed, showFab, hideFab, t]);
+
+  // Style WhatsApp : la liste reste en bas (le plus recent en bas)
+  useEffect(() => {
+    if (tab === 'contributions') {
+      contribEndRef.current?.scrollIntoView({ block: 'end' });
+    }
+  }, [tab, contributions.length, loading]);
 
   const handleContribSave = async (data) => {
     try {
@@ -226,7 +234,7 @@ export default function EventDetailPage() {
               <div className="empty-title">{t('contributions.noContributions')}</div>
             </div>
           ) : (
-            contributions.map(c => (
+            [...contributions].reverse().map(c => (
               <div key={c._id} className="list-row confirmed" id={`contrib-${c._id}`}>
                 <div className="row-avatar" style={{ background: getAvatarColor(c.friendName), color: 'var(--text-dark)' }}>
                   {getInitial(c.friendName)}
@@ -248,6 +256,7 @@ export default function EventDetailPage() {
               </div>
             ))
           )}
+          <div ref={contribEndRef} />
         </>
       )}
 
