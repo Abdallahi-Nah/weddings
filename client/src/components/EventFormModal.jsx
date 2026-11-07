@@ -26,7 +26,7 @@ export default function EventFormModal({ onSubmit, onClose, initial }) {
         <form onSubmit={handleSubmit} id="event-form">
           <div className="form-group">
             <label className="form-label" htmlFor="ev-title">{t('events.eventTitle')}</label>
-            <input id="ev-title" className="form-input" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} required placeholder="زواج أحمد — يوليو 2026" />
+            <input id="ev-title" className="form-input" autoFocus value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} required placeholder="زواج أحمد — يوليو 2026" />
           </div>
           <div className="form-group">
             <label className="form-label" htmlFor="ev-groom">{t('events.groomName')}</label>

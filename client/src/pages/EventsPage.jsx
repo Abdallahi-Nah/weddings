@@ -5,7 +5,6 @@ import toast from 'react-hot-toast';
 import { getEvents, createEvent, deleteEvent, toggleEventStatus } from '../services/api';
 import ConfirmDialog from '../components/ConfirmDialog';
 import EventFormModal from '../components/EventFormModal';
-import CelebrationCannons from '../components/CelebrationCannons';
 
 function formatMRU(amount) {
   return new Intl.NumberFormat().format(Math.round(amount)) + ' MRU';
@@ -19,7 +18,6 @@ export default function EventsPage() {
   const [filter, setFilter] = useState('all');
   const [showForm, setShowForm] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(null);
-  const [celebration, setCelebration] = useState(null);
 
   const load = () => getEvents().then(r => setEvents(r.data)).finally(() => setLoading(false));
   useEffect(() => { load(); }, []);
@@ -30,9 +28,8 @@ export default function EventsPage() {
     try {
       await createEvent(data);
       toast.success(t('events.created'));
-      setCelebration({ message: `تهانينا ـ ${data.groomName} ـ`, id: Date.now() });
       setShowForm(false);
-      load();
+      navigate('/', { state: { celebration: { message: `تهانينا ـ ${data.groomName} ـ`, id: Date.now() } } });
     } catch (err) {
       toast.error(err.response?.data?.errors?.[0]?.msg || t('common.error'));
     }
@@ -60,14 +57,6 @@ export default function EventsPage() {
 
   return (
     <div>
-      {celebration && (
-        <CelebrationCannons
-          key={celebration.id}
-          message={celebration.message}
-          duration={5}
-          onDone={() => setCelebration(null)}
-        />
-      )}
       {/* Header */}
       <div className="page-header">
         <div className="page-header-row">

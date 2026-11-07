@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { getEvents } from '../services/api';
+import CelebrationCannons from '../components/CelebrationCannons';
 
 function formatMRU(amount) {
   return new Intl.NumberFormat().format(Math.round(amount)) + ' MRU';
@@ -20,8 +21,15 @@ export default function DashboardPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [celebration, setCelebration] = useState(location.state?.celebration || null);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Evite de rejouer la fete apres un refresh
+    if (location.state?.celebration) navigate('/', { replace: true, state: null });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     getEvents().then(r => setEvents(r.data)).finally(() => setLoading(false));
@@ -34,6 +42,14 @@ export default function DashboardPage() {
 
   return (
     <div>
+      {celebration && (
+        <CelebrationCannons
+          key={celebration.id}
+          message={celebration.message}
+          duration={5}
+          onDone={() => setCelebration(null)}
+        />
+      )}
       {/* Header */}
       <div className="page-header">
         <div className="page-header-row">
@@ -140,14 +156,14 @@ export default function DashboardPage() {
               {t('dashboard.viewAll')}
             </span>
           </div>
-          <div className="mini-cards-row">
+          <div className="mini-cards-row past-events-grid">
             {pastEvents.map((ev, i) => {
               const p = pastelColors[i % pastelColors.length];
               return (
                 <div
                   key={ev._id}
                   className="mini-card"
-                  style={{ background: p.bg, cursor: 'pointer', minWidth: 140 }}
+                  style={{ background: p.bg, cursor: 'pointer' }}
                   onClick={() => navigate(`/events/${ev._id}`)}
                 >
                   <div className="mini-icon">{p.icon}</div>

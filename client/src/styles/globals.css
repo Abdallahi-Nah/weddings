@@ -375,6 +375,16 @@ p  { line-height: 1.6; }
 .mini-card .mini-label { font-size: 0.7rem; font-weight: 600; color: var(--text-mid); }
 .mini-card .mini-value { font-size: 0.95rem; font-weight: 800; color: var(--text-dark); }
 
+/* Derniers mariages : 2 cartes par ligne sur petits ecrans */
+@media (max-width: 600px) {
+  .mini-cards-row.past-events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+  .mini-cards-row.past-events-grid .mini-card { min-width: 0; }
+}
+
 /* ─── TOTALS BANNER ─────────────────────────────────── */
 .totals-banner {
   background: var(--primary);
@@ -467,7 +477,8 @@ p  { line-height: 1.6; }
   max-width: 480px;
   max-height: 90vh;
   overflow-y: auto;
-  animation: slideUp 0.25s ease;
+  animation: slideUp 0.18s ease-out;
+  will-change: transform;
 }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
@@ -493,6 +504,8 @@ p  { line-height: 1.6; }
   font-family: inherit;
   color: var(--text-dark);
   outline: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: border-color var(--transition);
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
@@ -731,7 +744,6 @@ p  { line-height: 1.6; }
 [dir="rtl"] .row-right { align-items: flex-start; }
 [dir="rtl"] .row-actions { flex-direction: row-reverse; }
 [dir="rtl"] .page-header-row { flex-direction: row-reverse; }
-[dir="rtl"] .section-header { flex-direction: row-reverse; }
 [dir="rtl"] .totals-banner { flex-direction: row-reverse; }
 [dir="rtl"] .mini-cards-row { flex-direction: row-reverse; }
 
