@@ -11,6 +11,7 @@ import {
 import ConfirmDialog from '../components/ConfirmDialog';
 import ContributionModal from '../components/ContributionModal';
 import ExpenseModal from '../components/ExpenseModal';
+import CelebrationCannons from '../components/CelebrationCannons';
 import { useFab } from '../contexts/FabContext';
 import { downloadUnpaidFriendsPng } from '../utils/unpaidFriendsPng';
 
@@ -31,6 +32,7 @@ export default function EventDetailPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [event, setEvent] = useState(null);
+  const [celebration, setCelebration] = useState(null);
   const [contributions, setContributions] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -105,6 +107,7 @@ export default function EventDetailPage() {
       if (contribModal === 'add') {
         await createContribution(id, data);
         toast.success(t('contributions.added'));
+        setCelebration({ name: data.friendName, id: Date.now() });
       } else {
         await updateContribution(id, contribModal._id, data);
         toast.success(t('contributions.updated'));
@@ -159,6 +162,13 @@ export default function EventDetailPage() {
 
   return (
     <div>
+      {celebration && (
+        <CelebrationCannons
+          key={celebration.id}
+          name={celebration.name}
+          onDone={() => setCelebration(null)}
+        />
+      )}
       {/* Header */}
       <div className="page-header">
         <div className="page-header-row">
